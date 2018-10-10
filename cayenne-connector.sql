@@ -1,0 +1,106 @@
+-- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
+--
+-- Host: localhost    Database: testdb
+-- ------------------------------------------------------
+-- Server version	5.7.23-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `ARTIST`
+--
+
+DROP TABLE IF EXISTS `ARTIST`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ARTIST` (
+  `DATE_OF_BIRTH` date DEFAULT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ARTIST`
+--
+
+LOCK TABLES `ARTIST` WRITE;
+/*!40000 ALTER TABLE `ARTIST` DISABLE KEYS */;
+INSERT INTO `ARTIST` VALUES ('1984-06-19',1,'Abc'),('1984-04-19',2,'Def'),('1984-06-19',3,'Jkl'),('1881-10-25',5,'Pablo Picasso'),('1881-10-25',6,'Pablo Picasso');
+/*!40000 ALTER TABLE `ARTIST` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `GALLERY`
+--
+
+DROP TABLE IF EXISTS `GALLERY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `GALLERY` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `GALLERY`
+--
+
+LOCK TABLES `GALLERY` WRITE;
+/*!40000 ALTER TABLE `GALLERY` DISABLE KEYS */;
+INSERT INTO `GALLERY` VALUES (1,'XYZ'),(2,'BCD'),(3,'Lmk'),(5,'Metropolitan Museum of Art'),(6,'Metropolitan Museum of Art'),(7,'Metropolitan Museum of Art');
+/*!40000 ALTER TABLE `GALLERY` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PAINTING`
+--
+
+DROP TABLE IF EXISTS `PAINTING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PAINTING` (
+  `ARTIST_ID` int(11) DEFAULT NULL,
+  `GALLERY_ID` int(11) DEFAULT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ARTIST_ID` (`ARTIST_ID`),
+  KEY `GALLERY_ID` (`GALLERY_ID`),
+  CONSTRAINT `PAINTING_ibfk_1` FOREIGN KEY (`ARTIST_ID`) REFERENCES `ARTIST` (`ID`) ON DELETE CASCADE,
+  CONSTRAINT `PAINTING_ibfk_2` FOREIGN KEY (`GALLERY_ID`) REFERENCES `GALLERY` (`ID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PAINTING`
+--
+
+LOCK TABLES `PAINTING` WRITE;
+/*!40000 ALTER TABLE `PAINTING` DISABLE KEYS */;
+INSERT INTO `PAINTING` VALUES (1,1,1,'Sparkles'),(2,1,2,'Wink'),(2,3,3,'THE MINT'),(5,6,6,'Gertrude Stein'),(5,6,7,'Girl Reading at a Table'),(6,7,8,'Gertrude Stein'),(6,7,9,'Girl Reading at a Table');
+/*!40000 ALTER TABLE `PAINTING` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-10-10 17:33:19
